@@ -61,9 +61,11 @@ const movieApi = () => {
       const movies = data.results;
 
       movies.map((movie) => {
-        const url = movie.poster_path;
+        const { poster_path, title, overview, vote_average } = movie;
+        const newMovie = { ...movie };
+        const url = poster_path;
         const imageUrl = `https://image.tmdb.org/t/p/w200${url}`;
-        const imageAlt = movie.title;
+        const imageAlt = title;
 
         const movieDiv = createDiv("movie");
 
@@ -73,15 +75,15 @@ const movieApi = () => {
         const movieInfo = createDiv("movie-info");
 
         const movieTitle = createDiv("movie-title");
-        movieTitle.textContent = movie.title;
+        movieTitle.textContent = title;
         movieInfo.appendChild(movieTitle);
 
         const movieSummary = createDiv("movie-summary");
-        movieSummary.textContent = movie.overview;
+        movieSummary.textContent = overview;
         movieInfo.appendChild(movieSummary);
 
         const movieRating = createDiv("movie-rating");
-        movieRating.textContent = `Note : ${movie.vote_average}`;
+        movieRating.textContent = `Note : ${vote_average}`;
         movieInfo.appendChild(movieRating);
 
         movieDiv.appendChild(movieInfo);
